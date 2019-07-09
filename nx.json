@@ -13,6 +13,9 @@
     },
     "dep-graph-issue": {
       "tags": []
+    },
+    "feature-shell": {
+      "tags": []
     }
   }
 }

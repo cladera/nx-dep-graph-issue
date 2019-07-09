@@ -119,6 +119,37 @@
           }
         }
       }
+    },
+    "feature-shell": {
+      "projectType": "library",
+      "root": "libs/feature-shell",
+      "sourceRoot": "libs/feature-shell/src",
+      "prefix": "dep-graph-issue",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/feature-shell/tsconfig.lib.json",
+              "libs/feature-shell/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/feature-shell/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/feature-shell/jest.config.js",
+            "tsConfig": "libs/feature-shell/tsconfig.spec.json",
+            "setupFile": "libs/feature-shell/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {
