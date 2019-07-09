@@ -1,0 +1,141 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "",
+  "projects": {
+    "dep-graph-issue": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/workspace:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/dep-graph-issue",
+      "sourceRoot": "apps/dep-graph-issue/src",
+      "prefix": "dep-graph-issue",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/dep-graph-issue",
+            "index": "apps/dep-graph-issue/src/index.html",
+            "main": "apps/dep-graph-issue/src/main.ts",
+            "polyfills": "apps/dep-graph-issue/src/polyfills.ts",
+            "tsConfig": "apps/dep-graph-issue/tsconfig.app.json",
+            "assets": [
+              "apps/dep-graph-issue/src/favicon.ico",
+              "apps/dep-graph-issue/src/assets"
+            ],
+            "styles": ["apps/dep-graph-issue/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/dep-graph-issue/src/environments/environment.ts",
+                  "with": "apps/dep-graph-issue/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "dep-graph-issue:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "dep-graph-issue:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "dep-graph-issue:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/dep-graph-issue/tsconfig.app.json",
+              "apps/dep-graph-issue/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/dep-graph-issue/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/dep-graph-issue/jest.config.js",
+            "tsConfig": "apps/dep-graph-issue/tsconfig.spec.json",
+            "setupFile": "apps/dep-graph-issue/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "dep-graph-issue-e2e": {
+      "root": "apps/dep-graph-issue-e2e",
+      "sourceRoot": "apps/dep-graph-issue-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/dep-graph-issue-e2e/cypress.json",
+            "tsConfig": "apps/dep-graph-issue-e2e/tsconfig.e2e.json",
+            "devServerTarget": "dep-graph-issue:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "dep-graph-issue:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/dep-graph-issue-e2e/tsconfig.e2e.json",
+            "exclude": ["**/node_modules/**", "!apps/dep-graph-issue-e2e/**"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "warnings": {
+      "typescriptMismatch": false,
+      "versionMismatch": false
+    },
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "dep-graph-issue"
+}

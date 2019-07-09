@@ -1,0 +1,18 @@
+{
+  "npmScope": "dep-graph-issue",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "dep-graph-issue-e2e": {
+      "tags": []
+    },
+    "dep-graph-issue": {
+      "tags": []
+    }
+  }
+}
